@@ -40,7 +40,7 @@ public class Backpack {
         int loc = hashFunction(weapon);
         Node newNode = new Node(weapon);
         
-        if(numItems < maxItems){
+        if(numItems < maxItems && maxWeight - (currWeight + newNode.data.weight) >= 0){
             
         if(items[loc] == null){
             items[loc] = newNode;
@@ -49,6 +49,7 @@ public class Backpack {
             newNode.next = items[loc];
             items[loc] = newNode;
         }
+        currWeight += newNode.data.weight;
         numItems++;
         return true;
     }
