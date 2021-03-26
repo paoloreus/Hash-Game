@@ -49,6 +49,7 @@ public class Backpack {
             newNode.next = items[loc];
             items[loc] = newNode;
         }
+        numItems++;
         return true;
     }
         return false;
