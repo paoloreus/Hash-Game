@@ -66,6 +66,21 @@ public class Assignment2Structure {
                 weaponName = sc.next();
             }
         }
+        
+        public static void deleteWeapons(ArrayManager h, Scanner sc){
+            System.out.println("***********WELCOME TO THE WEAPON DELETE MENU*********");
+            System.out.print("Please enter the NAME of the Weapon ('end' to quit):");
+            String weaponName = sc.next();
+            while(weaponName.compareTo("end") != 0){
+              
+                if(h.delete(weaponName)){
+                    System.out.println("Item has been succesfully deleted");
+                }
+                else{
+                    System.out.println("Item does not exist");
+                }
+            }
+        }
 
 
 
@@ -130,6 +145,13 @@ public class Assignment2Structure {
             int choice = runMenu(sc);
             
             if(choice == 1){
+                addWeapons(h, sc);
+            }
+            else if(choice == 2){
+                deleteWeapons(h, sc);
+            }
+            
+            else if(choice == 3){
                 //Continue here
             }
         }

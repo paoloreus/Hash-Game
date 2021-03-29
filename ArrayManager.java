@@ -90,12 +90,12 @@ public class ArrayManager {
     
    
     
-    public boolean delete(Weapon weapon){
-        int startLoc = hashFunction(weapon.weaponName);
+    public boolean delete(String name){
+        int startLoc = hashFunction(name);
         int loc = startLoc;
         int counter = 1;
         
-        while(table[loc] != null && table[loc].item.weaponName.compareTo(weapon.weaponName) != 0){
+        while(table[loc] != null && table[loc].item.weaponName.compareTo(name) != 0){
             loc = startLoc + counter * counter;
             loc = loc % maxItems;
             counter++;

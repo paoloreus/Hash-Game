@@ -26,8 +26,7 @@ public class Player {
     public boolean buy(Weapon w){
         if(money >= w.cost){
         if(backpack.addItem(w)){
-          System.out.println(w.weaponName+" bought...");
-        //numItems++;
+        System.out.println(w.weaponName+" bought...");
         System.out.println(backpack.getNumItems());
         return true;
         }       

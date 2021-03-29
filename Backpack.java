@@ -76,7 +76,6 @@ public class Backpack {
         return numItems;
     }
     
-    //Change this to LinkedList-centric
     public void backpackItems(){
        Node curr;
        
