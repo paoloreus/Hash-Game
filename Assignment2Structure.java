@@ -79,7 +79,11 @@ public class Assignment2Structure {
                 else{
                     System.out.println("Item does not exist");
                 }
+            System.out.print("Please enter the NAME of another Weapon ('end' to quit):");
+            weaponName = sc.next();
             }
+            
+           
         }
 
 
@@ -141,19 +145,46 @@ public class Assignment2Structure {
                        
         }
         
+        static void checkToProceed(Scanner sc){
+            System.out.println("Press any key to continue");
+            sc.next();
+        }
+        
         public static void menuFunctions(Scanner sc, ArrayManager h, Player p){
+            
+            
             int choice = runMenu(sc);
+            if(choice == 6){
+                return;
+            }
             
             if(choice == 1){
                 addWeapons(h, sc);
+                checkToProceed(sc);
             }
             else if(choice == 2){
                 deleteWeapons(h, sc);
+                checkToProceed(sc);
             }
             
             else if(choice == 3){
-                //Continue here
+                showRoom(h, p, sc);
+                checkToProceed(sc);
             }
+            
+            else if(choice == 4){
+                p.printBackpack();
+                checkToProceed(sc);
+                
+            }
+            
+            else if(choice == 5){
+                p.printCharacter();
+                checkToProceed(sc);
+            }
+            
+            menuFunctions(sc, h, p);  //Using recursion instead of a while loop
+            return;
         }
         
         public static void main(String[] args)
@@ -164,10 +195,10 @@ public class Assignment2Structure {
             pname=sc.next();
             Player pl= new Player(pname,45);
             ArrayManager ht= new ArrayManager(101);
-            runMenu(sc);
-            addWeapons(ht,sc);
-            showRoom(ht, pl,sc);
-            pl.printCharacter();
+            menuFunctions(sc, ht, pl);
+            //addWeapons(ht,sc);
+            //showRoom(ht, pl,sc);
+            //pl.printCharacter();
 
         }
     
