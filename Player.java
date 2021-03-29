@@ -12,7 +12,7 @@ package assignment2structure;
 public class Player {
     
     public String name;
-    public Weapon[] backpack;
+    public Backpack backpack;
     public int numItems;
     public double money;
     
@@ -20,22 +20,40 @@ public class Player {
         name = n;
         money = m;
         numItems = 0;
-        backpack = new Weapon[10];
+        backpack = new Backpack(30, 90);
     }
     
-    public void buy(Weapon w){
-        System.out.println(w.weaponName+" bought...");
-        backpack[numItems] = w;
-        numItems++;
-        System.out.println(numItems);
+    public boolean buy(Weapon w){
+        if(money >= w.cost){
+        if(backpack.addItem(w)){
+          System.out.println(w.weaponName+" bought...");
+        //numItems++;
+        System.out.println(backpack.getNumItems());
+        return true;
+        }       
+    }
+        return false;
     }
     
     public void withdraw(double amt){
         money = money - amt;
     }
     
-    public boolean inventoryFull(){
-        return (numItems == 10);
+    public boolean inventoryCheck(){
+        if(backpack.checkNumItems()){
+            return true;
+        }
+        
+        System.out.println("Bag is full");
+        return false;
+    }
+    
+    public boolean weightCheck(Weapon weapon){
+        if(backpack.checkWeight(weapon)){
+            return true;
+        }
+        System.out.println("Weight is not enough to carry this weapon");
+        return false;
     }
     
     public void printCharacter(){
@@ -44,10 +62,8 @@ public class Player {
     }
     
     public void printBackpack(){
-        System.out.println(name + ", you own " + numItems + " Weapons:");
-        for(int i = 0; i < numItems; i++){
-            System.out.println(backpack[i].weaponName);
-        }
+        System.out.println(name + ", you own " + backpack.getNumItems() + " Weapons:");
+        backpack.backpackItems(); //printing each weapon's name from the backpack object
         System.out.println();
     }
 }

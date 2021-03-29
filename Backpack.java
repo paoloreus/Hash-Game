@@ -40,7 +40,7 @@ public class Backpack {
         int loc = hashFunction(weapon);
         Node newNode = new Node(weapon);
         
-        if(numItems < maxItems && maxWeight - (currWeight + newNode.data.weight) >= 0){
+        if(checkNumItems() && checkWeight(weapon)){
             
         if(items[loc] == null){
             items[loc] = newNode;
@@ -54,5 +54,38 @@ public class Backpack {
         return true;
     }
         return false;
+    }
+    
+    public boolean checkWeight(Weapon weapon){
+        Node newNode = new Node(weapon);
+        if(maxWeight - (currWeight + newNode.data.weight) >= 0){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean checkNumItems(){
+        if(numItems < maxItems){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public int getNumItems(){
+        return numItems;
+    }
+    
+    //Change this to LinkedList-centric
+    public void backpackItems(){
+       Node curr;
+       
+       for(int i = 0; i < maxItems; i++){
+           curr = items[i];
+           while(curr != null){
+               System.out.println(curr.data.weaponName);
+               curr = curr.next;
+           }
+       }
     }
 }
