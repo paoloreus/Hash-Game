@@ -23,6 +23,18 @@ public class Assignment2Structure {
             }
             return sc.nextInt();
         }
+    
+    public static String getAlpha(Scanner sc, String message){
+        System.out.println(message);
+        String word = sc.next();
+        while(!word.matches("[a-zA-Z]+")){
+            System.out.println("Input cannot have numbers.");
+            System.out.println(message);
+            word = sc.next();
+        }
+        
+        return word;
+    }
         
         public static double getDouble(Scanner sc,String message){
             System.out.print(message);
@@ -40,8 +52,9 @@ public class Assignment2Structure {
             System.out.println("***********WELCOME TO THE WEAPON ADDING MENU*********");
             String weaponName; int weaponRange; int weaponDamage; double weaponWeight; double weaponCost;
             int quantity;
-            System.out.print("Please enter the NAME of the Weapon ('end' to quit):");
-            weaponName=sc.next();
+            String prompt = "Please enter the NAME of the Weapon ('end' to quit):";
+            //weaponName=sc.next();
+            weaponName = getAlpha(sc, prompt);
             while (weaponName.compareTo("end") != 0)
             {
                 if(h.get(weaponName) != null){
@@ -69,8 +82,8 @@ public class Assignment2Structure {
         
         public static void deleteWeapons(ArrayManager h, Scanner sc){
             System.out.println("***********WELCOME TO THE WEAPON DELETE MENU*********");
-            System.out.print("Please enter the NAME of the Weapon ('end' to quit):");
-            String weaponName = sc.next();
+            String msg = ("Please enter the NAME of the Weapon ('end' to quit):");
+            String weaponName = getAlpha(sc, msg);
             while(weaponName.compareTo("end") != 0){
               
                 if(h.delete(weaponName)){
@@ -92,14 +105,15 @@ public class Assignment2Structure {
             System.out.println("WELCOME TO THE SHOWROOM!!!!");
             ht.printTable();
             System.out.println("You have "+p.money+" money.");
-            System.out.println("Please select a weapon to buy('end' to quit):");
+            //System.out.println("Please select a weapon to buy('end' to quit):");
         }
         
         public static void showRoom(ArrayManager ht, Player p,Scanner sc)
         {
             String choice;
             showRoomMenu(ht,p);
-            choice=sc.next();
+            String msg = "Please select a weapon to buy('end' to quit):";
+            choice = getAlpha(sc, msg);
             while (choice.compareTo("end") != 0 && p.inventoryCheck())
             {
                 ShopItem si = ht.get(choice);
@@ -121,7 +135,7 @@ public class Assignment2Structure {
                     System.out.println(" ** "+choice+" not found!! **" );
                 }
                 showRoomMenu(ht,p);
-                choice = sc.next();
+                choice = getAlpha(sc,msg);
             }
             System.out.println("");
         }
@@ -147,7 +161,8 @@ public class Assignment2Structure {
         
         static void checkToProceed(Scanner sc){
             System.out.println("Press any key to continue");
-            sc.next();
+            sc.nextLine();
+            sc.nextLine();
         }
         
         public static void menuFunctions(Scanner sc, ArrayManager h, Player p){
