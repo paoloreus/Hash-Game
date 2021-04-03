@@ -12,8 +12,8 @@ package assignment2structure;
 public class Player {
     
     private String name;
-    public Backpack backpack;
-    public int numItems;
+    private Backpack backpack;
+    private int numItems;
     private double money;
     
     public Player(String n, double m){
