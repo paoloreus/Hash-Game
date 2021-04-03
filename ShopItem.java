@@ -3,7 +3,10 @@ package assignment2structure;
 
 /**
  *
- * @author Paolo
+ * @authors:
+ * Paolo Tous            - 101325245
+ * Yukina Ishiguro       - 101274311
+ * Robertha Alvarez Diaz - 101236645
  */
 public class ShopItem {
     

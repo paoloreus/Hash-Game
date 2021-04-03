@@ -1,15 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package assignment2structure;
 
 import java.util.Scanner;
 
 /**
  *
- * @author Paolo
+ * @authors:
+ * Paolo Tous            - 101325245
+ * Yukina Ishiguro       - 101274311
+ * Robertha Alvarez Diaz - 101236645
  */
 public class Assignment2Structure {
 

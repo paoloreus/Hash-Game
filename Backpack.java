@@ -2,7 +2,10 @@ package assignment2structure;
 
 /**
  *
- * @author Paolo
+ * @authors:
+ * Paolo Tous            - 101325245
+ * Yukina Ishiguro       - 101274311
+ * Robertha Alvarez Diaz - 101236645
  */
 public class Backpack {
     
@@ -57,8 +60,7 @@ public class Backpack {
     }
     
     public boolean checkWeight(Weapon weapon){
-        Node newNode = new Node(weapon);
-        if(maxWeight - (currWeight + newNode.data.getWeight()) >= 0){
+        if(maxWeight - (currWeight + weapon.getWeight()) >= 0){
             return true;
         }
         return false;
