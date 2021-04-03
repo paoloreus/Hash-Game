@@ -36,12 +36,12 @@ public class ArrayManager {
     public void put(Weapon item, int quantity){
            
         if(numItems / maxItems < loadFactor && checkTypes()){
-            int startLoc = hashFunction(item.weaponName);
+            int startLoc = hashFunction(item.getWeaponName());
             int loc = startLoc;
             int counter = 1;
             boolean isSameType = false;
             
-            while(table[loc] != null && table[loc].item.weaponName.compareTo(del) != 0){
+            while(table[loc] != null && table[loc].item.getWeaponName().compareTo(del) != 0){
                 loc = startLoc + counter * counter;
                 loc = loc % maxItems;
                 counter++;
@@ -65,7 +65,7 @@ public class ArrayManager {
     
     
     public void putAdditional(Weapon item, int quantity){
-        ShopItem itemToAdd = get(item.weaponName);
+        ShopItem itemToAdd = get(item.getWeaponName());
         if(itemToAdd != null){
             itemToAdd.numberInStock += quantity;
         }
@@ -76,7 +76,7 @@ public class ArrayManager {
         int startLoc = hashFunction(key);
         int loc = startLoc;
         int counter =1;
-        while(table[loc] != null && key.compareTo(table[loc].item.weaponName) != 0){
+        while(table[loc] != null && key.compareTo(table[loc].item.getWeaponName()) != 0){
             loc = startLoc + counter * counter;
             loc = loc % maxItems;
             counter++;
@@ -95,14 +95,14 @@ public class ArrayManager {
         int loc = startLoc;
         int counter = 1;
         
-        while(table[loc] != null && table[loc].item.weaponName.compareTo(name) != 0){
+        while(table[loc] != null && table[loc].item.getWeaponName().compareTo(name) != 0){
             loc = startLoc + counter * counter;
             loc = loc % maxItems;
             counter++;
         }
         
         if(table[loc] != null){
-            table[loc].item.weaponName = del;
+            table[loc].item.setWeaponName(del);
             numItems--;
             return true;
         }
@@ -111,9 +111,10 @@ public class ArrayManager {
     
     public void printTable(){
         for(int i = 0; i < maxItems; i++){
-            if(table[i] != null && table[i].item.weaponName.compareTo(del) != 0 && table[i].numberInStock > 0){
-            System.out.println("Name: " +table[i].item.weaponName + "   Damage: " + table[i].item.damage + "   Cost: " +
-                    table[i].item.cost + "  Quantity in stock: " + table[i].numberInStock);
+            if(table[i] != null && table[i].item.getWeaponName().compareTo(del) != 0 && table[i].numberInStock > 0){
+            System.out.println("Name: " +table[i].item.getWeaponName() + "  Range: " + table[i].item.getRange() +
+                    "   Damage: " + table[i].item.getDamage() + "   Cost: " +
+                    table[i].item.getCost() + "  Quantity in stock: " + table[i].numberInStock);
             }
         }
     }

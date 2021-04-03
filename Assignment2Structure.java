@@ -104,7 +104,7 @@ public class Assignment2Structure {
         public static void showRoomMenu(ArrayManager ht,Player p){
             System.out.println("WELCOME TO THE SHOWROOM!!!!");
             ht.printTable();
-            System.out.println("You have "+p.money+" money.");
+            System.out.println("You have "+p.getMoney()+" money.");
             //System.out.println("Please select a weapon to buy('end' to quit):");
         }
         
@@ -122,7 +122,7 @@ public class Assignment2Structure {
                         if(p.weightCheck(si.item)){
                         boolean transaction = p.buy(si.item);
                         if(transaction){
-                        p.withdraw(si.item.cost);
+                        p.withdraw(si.item.getCost());
                         si.numberInStock--;
                         }
                         else{

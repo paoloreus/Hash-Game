@@ -11,10 +11,10 @@ package assignment2structure;
  */
 public class Player {
     
-    public String name;
+    private String name;
     public Backpack backpack;
     public int numItems;
-    public double money;
+    private double money;
     
     public Player(String n, double m){
         name = n;
@@ -23,10 +23,14 @@ public class Player {
         backpack = new Backpack(30, 90);
     }
     
+    public double getMoney(){
+        return money;
+    }
+    
     public boolean buy(Weapon w){
-        if(money >= w.cost){
+        if(money >= w.getCost()){
         if(backpack.addItem(w)){
-        System.out.println(w.weaponName+" bought...");
+        System.out.println(w.getWeaponName()+" bought...");
         System.out.println(backpack.getNumItems());
         return true;
         }       

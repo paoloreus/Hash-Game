@@ -11,11 +11,11 @@ package assignment2structure;
  */
 public class Weapon {
     
-    public String weaponName;
-    public int range;
-    public int damage;
-    public double weight;
-    public double cost;
+    private String weaponName;
+    private int range;
+    private int damage;
+    private double weight;
+    private double cost;
     
     public Weapon(String name, int range, int damage, double weight, double cost){
         this.weaponName = name;
@@ -25,5 +25,28 @@ public class Weapon {
         this.cost = cost;
     }
     
+    public String getWeaponName(){
+        return weaponName;
+    }
+    
+    public void setWeaponName(String name){
+        this.weaponName = name;
+    }
+    
+    public int getRange(){
+        return range;
+    }
+    
+    public int getDamage(){
+        return damage;
+    }
+    
+    public double getWeight(){
+        return weight;
+    }
+    
+    public double getCost(){
+        return cost;
+    }
     
 }

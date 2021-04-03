@@ -24,8 +24,8 @@ public class Backpack {
     private int hashFunction(Weapon weapon){
         int value = 0;
         int weight = 1;
-        String name = weapon.weaponName;
-        int avg = (weapon.range + weapon.damage) / 2;
+        String name = weapon.getWeaponName();
+        int avg = (weapon.getRange() + weapon.getDamage()) / 2;
         
         for(int i = 0; i < name.length(); i++){
             value += (name.toLowerCase().charAt(i) - 'a'+1) * weight;
@@ -49,7 +49,7 @@ public class Backpack {
             newNode.next = items[loc];
             items[loc] = newNode;
         }
-        currWeight += newNode.data.weight;
+        currWeight += newNode.data.getWeight();
         numItems++;
         return true;
     }
@@ -58,7 +58,7 @@ public class Backpack {
     
     public boolean checkWeight(Weapon weapon){
         Node newNode = new Node(weapon);
-        if(maxWeight - (currWeight + newNode.data.weight) >= 0){
+        if(maxWeight - (currWeight + newNode.data.getWeight()) >= 0){
             return true;
         }
         return false;
@@ -82,7 +82,7 @@ public class Backpack {
        for(int i = 0; i < maxItems; i++){
            curr = items[i];
            while(curr != null){
-               System.out.println(curr.data.weaponName);
+               System.out.println(curr.data.getWeaponName());
                curr = curr.next;
            }
        }
