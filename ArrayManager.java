@@ -45,8 +45,8 @@ public class ArrayManager {
     //IMPORTANT: Object has already been created in the main class
     //Based on user inputs, an object would be created, this method's intent
     //is NOT to create a new object but to place the object in the array
-    //Please do not consider this a sign that we are not aware of how things
-    //work, I chose this technique to utilize less parameters and make it readable
+    //This technique is compatible with how we have structured this project
+    //and in the same time, I'm using less parameters for better readability
     public void put(Weapon item, int quantity){
            
         if(numItems / maxItems < loadFactor && checkNumTypes()){
@@ -129,7 +129,7 @@ public class ArrayManager {
             return true;
         
         }
-        else if(amount < table[loc].numberInStock){
+        else if(amount < table[loc].numberInStock && amount >= 0){
             table[loc].numberInStock -= amount;
             numItems -= amount;
             return true;

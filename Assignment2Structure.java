@@ -22,6 +22,8 @@ public class Assignment2Structure {
             return sc.nextInt();
         }
     
+    //Helper method to make sure input is alphabetical
+    //I'm using that mainly with weapons
     public static String getAlpha(Scanner sc, String message){
         System.out.println(message);
         String word = sc.next();
@@ -44,14 +46,17 @@ public class Assignment2Structure {
             return sc.nextDouble();
         }
         
-    
+        
+        //This will validate input first check if item already exists and
+        //Apply either adding additional number of items to stock or adding
+        //A brand new item to the shop, in that case we'd make a new object
+        //And use the methods from the ArrayManager class to store the object
         public static void addWeapons(ArrayManager h,Scanner sc)
         {
             System.out.println("***********WELCOME TO THE WEAPON ADDING MENU*********");
             String weaponName; int weaponRange; int weaponDamage; double weaponWeight; double weaponCost;
             int quantity;
             String prompt = "Please enter the NAME of the Weapon ('end' to quit):";
-            //weaponName=sc.next();
             weaponName = getAlpha(sc, prompt);
             while (weaponName.compareTo("end") != 0)
             {
@@ -78,6 +83,10 @@ public class Assignment2Structure {
             }
         }
         
+        //This will validate input, search for the item by name and if a valid
+        //result is returned, we will display the number of quantity that item
+        //has in stock and user selects the number of items they'd like to delete
+        //Please refer to the delete method in ArrayManager for more info
         public static void deleteWeapons(ArrayManager h, Scanner sc){
             System.out.println("***********WELCOME TO THE WEAPON DELETE MENU*********");
             String msg = "Please enter the NAME of the Weapon ('end' to quit):";
@@ -90,7 +99,10 @@ public class Assignment2Structure {
             if(h.get(weaponName) != null){                
             num = getInteger(sc, msgQuantity);
             if(h.deleteAmount(weaponName, num))
-            System.out.println(num + " items have been deleted");            
+            System.out.println(num + " items have been deleted");   
+            else{
+                System.out.println("Invalid choice");
+            }
             }
             
             System.out.print("Please enter the NAME of another Weapon ('end' to quit):");
@@ -100,13 +112,17 @@ public class Assignment2Structure {
         }
 
 
-
+        
+        //This will run upon visiting the shop
         public static void showRoomMenu(ArrayManager ht,Player p){
             System.out.println("WELCOME TO THE SHOWROOM!!!!");
             ht.printTable();
             System.out.println("You have "+p.getMoney()+" money.");
         }
         
+        //Shop menu, Player may attempt to buy an item, we will validate
+        //input and check if user has enough money, if all is clear then
+        //we proceed with the purchase and apply changes accordingly
         public static void showRoom(ArrayManager ht, Player p,Scanner sc)
         {
             String choice;
@@ -139,6 +155,7 @@ public class Assignment2Structure {
             System.out.println("");
         }
         
+        //This will run the menu
         public static int runMenu(Scanner sc){
            System.out.println("***********WELCOME TO WORLD OF WARCRAFT*********");
             System.out.println("1) Add Items to the shop");
@@ -158,12 +175,14 @@ public class Assignment2Structure {
                        
         }
         
+        //This is to give the User a chance to process the information before moving on
         static void checkToProceed(Scanner sc){
             System.out.println("Press any key to continue");
             sc.nextLine();
             sc.nextLine();
         }
         
+        //Menu functions
         public static void menuFunctions(Scanner sc, ArrayManager h, Player p){
             
             
