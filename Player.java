@@ -26,6 +26,8 @@ public class Player {
         return money;
     }
     
+    //This is a helper method that checks if player has enough money
+    //If so then an attempt to store the weapon is made
     public boolean buy(Weapon w){
         if(money >= w.getCost()){
         if(backpack.addItem(w)){
@@ -36,6 +38,8 @@ public class Player {
     }
         return false;
     }
+    
+    //Helpers below
     
     public void withdraw(double amt){
         money = money - amt;

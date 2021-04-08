@@ -7,6 +7,8 @@ package assignment2structure;
  * Yukina Ishiguro       - 101274311
  * Robertha Alvarez Diaz - 101236645
  */
+
+//Hash Function needs more than just name
 public class ArrayManager {
     
     private int maxItems;
@@ -24,6 +26,9 @@ public class ArrayManager {
         loadFactor = 0.75;
     }
     
+    //I am only using name to hash because we will be searching by name in
+    //other methods and when user searches we wouldn't ask the user to search
+    //for anything other than the name (since we won't have duplicate names)
     public int hashFunction(String name){
         int value = 0;
         int weight = 1;
@@ -36,9 +41,15 @@ public class ArrayManager {
         return value % maxItems;
         
     }
+    
+    //IMPORTANT: Object has already been created in the main class
+    //Based on user inputs, an object would be created, this method's intent
+    //is NOT to create a new object but to place the object in the array
+    //Please do not consider this a sign that we are not aware of how things
+    //work, I chose this technique to utilize less parameters and make it readable
     public void put(Weapon item, int quantity){
            
-        if(numItems / maxItems < loadFactor && checkTypes()){
+        if(numItems / maxItems < loadFactor && checkNumTypes()){
             int startLoc = hashFunction(item.getWeaponName());
             int loc = startLoc;
             int counter = 1;
@@ -54,27 +65,29 @@ public class ArrayManager {
                 numTypes++;
             }
             table[loc] = new ShopItem(item, quantity);
-            numItems++;
+            numItems += quantity;
         }
     }
     
-    public boolean checkTypes(){
-        if(numTypes > 80){
+    //Helper
+    public boolean checkNumTypes(){
+        if(numTypes / 80 > loadFactor){
             return false;
         }
         
         return true;
     }
     
-    
-    public void putAdditional(Weapon item, int quantity){
-        ShopItem itemToAdd = get(item.getWeaponName());
+    //This is an alternative to the main put method, in case user is attempting
+    //To store an already existing item
+    public void putAdditional(String name, int quantity){
+        ShopItem itemToAdd = get(name);
         if(itemToAdd != null){
             itemToAdd.numberInStock += quantity;
         }
     }
     
-    
+    //Search by name
     public ShopItem get(String key){
         int startLoc = hashFunction(key);
         int loc = startLoc;
@@ -92,23 +105,56 @@ public class ArrayManager {
     }
     
    
-    
-    public boolean delete(String name){
+    //Searches by name then deletes the amount, if the whole amount is deleted
+    //The object itself will be marked as deleted otherwise we'd just deduct
+    //from quantity    
+    public boolean deleteAmount(String name, int amount){
         int startLoc = hashFunction(name);
         int loc = startLoc;
         int counter = 1;
         
-        while(table[loc] != null && table[loc].item.getWeaponName().compareTo(name) != 0){
+         while(table[loc] != null && table[loc].item.getWeaponName().compareTo(name) != 0){
             loc = startLoc + counter * counter;
             loc = loc % maxItems;
             counter++;
         }
-        
-        if(table[loc] != null){
+         
+        if(table[loc] != null){ 
+        if(amount == table[loc].numberInStock){         
+            if(!checkSimilarTypes(table[loc].item.getWeaponName())){
+                numTypes--;
+            }
             table[loc].item.setWeaponName(del);
-            numItems--;
+            numItems -= amount;
+            return true;
+        
+        }
+        else if(amount < table[loc].numberInStock){
+            table[loc].numberInStock -= amount;
+            numItems -= amount;
             return true;
         }
+        }
+        return false;
+    }
+    
+    //Helper Methods below
+    public String checkQuantity(String name){
+        ShopItem item = get(name);
+        if(item != null){
+            return "There are " + item.numberInStock + " items of that weapon in stock";
+        }
+        
+        return "Item is not in stock";
+    }
+    
+    public boolean checkSimilarTypes(String name){
+        int loc = hashFunction(name);
+        
+        if(table[loc] != null && table[loc].item.getWeaponName().compareTo(del) != 0){
+            return true;
+        }
+        
         return false;
     }
     

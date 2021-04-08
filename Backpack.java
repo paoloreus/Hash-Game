@@ -24,6 +24,9 @@ public class Backpack {
         currWeight = 0.0;
     }
     
+    //Using an object here makes sense because we're hashing an already existing object
+    //The object already exists in the shop so in main, we search for a weapon by name
+    //And use the result returned to add the object to our backpack
     private int hashFunction(Weapon weapon){
         int value = 0;
         int weight = 1;
@@ -39,6 +42,10 @@ public class Backpack {
         return value % maxItems;
     }
     
+    //Here I'm getting the object that User has successfully searched for
+    //We will make a brand new object that is basically a copy of the original
+    //Without referencing that specific object
+    //Once again, adding the object here makes sense
     public boolean addItem(Weapon weapon){
         int loc = hashFunction(weapon);
         Node newNode = new Node(weapon);
@@ -59,6 +66,7 @@ public class Backpack {
         return false;
     }
     
+    //Helper Methods
     public boolean checkWeight(Weapon weapon){
         if(maxWeight - (currWeight + weapon.getWeight()) >= 0){
             return true;

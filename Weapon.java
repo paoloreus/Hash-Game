@@ -23,6 +23,8 @@ public class Weapon {
         this.cost = cost;
     }
     
+    //This constructor will allow us to create a copy of a specific object
+    //Without referencing that object
     public Weapon(Weapon original){
         weaponName = original.weaponName;
         range = original.range;
@@ -30,6 +32,8 @@ public class Weapon {
         weight = original.weight;
         cost = original.cost;
     }
+    
+    //Getters and Setters below
     
     public String getWeaponName(){
         return weaponName;

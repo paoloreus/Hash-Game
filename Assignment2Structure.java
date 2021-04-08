@@ -57,10 +57,10 @@ public class Assignment2Structure {
             {
                 if(h.get(weaponName) != null){
                     quantity = getInteger(sc, "Item already exists. Please enter the quantity you'd like to add in stock: ");
-                    h.putAdditional(h.get(weaponName).item, quantity);
+                    h.putAdditional(weaponName, quantity);
                 }
                 else{
-                if(h.checkTypes()){
+                if(h.checkNumTypes()){
                 weaponRange= getInteger(sc,"Please enter the Range of the Weapon (0-10):"); 
                 weaponDamage=getInteger(sc,"Please enter the Damage of the Weapon:"); 
                 weaponWeight= getDouble(sc,"Please enter the Weight of the Weapon (in pounds):");
@@ -80,21 +80,23 @@ public class Assignment2Structure {
         
         public static void deleteWeapons(ArrayManager h, Scanner sc){
             System.out.println("***********WELCOME TO THE WEAPON DELETE MENU*********");
-            String msg = ("Please enter the NAME of the Weapon ('end' to quit):");
+            String msg = "Please enter the NAME of the Weapon ('end' to quit):";
+            String msgQuantity = "Please enter the number of items you want to remove from stock:";
             String weaponName = getAlpha(sc, msg);
+            int num;
+            
             while(weaponName.compareTo("end") != 0){
-              
-                if(h.delete(weaponName)){
-                    System.out.println("Item has been succesfully deleted");
-                }
-                else{
-                    System.out.println("Item does not exist");
-                }
-            System.out.print("Please enter the NAME of another Weapon ('end' to quit):");
-            weaponName = sc.next();
+            System.out.println(h.checkQuantity(weaponName));    
+            if(h.get(weaponName) != null){                
+            num = getInteger(sc, msgQuantity);
+            if(h.deleteAmount(weaponName, num))
+            System.out.println(num + " items have been deleted");            
             }
             
-           
+            System.out.print("Please enter the NAME of another Weapon ('end' to quit):");
+            weaponName = getAlpha(sc, msg);
+            
+            }                       
         }
 
 
@@ -103,7 +105,6 @@ public class Assignment2Structure {
             System.out.println("WELCOME TO THE SHOWROOM!!!!");
             ht.printTable();
             System.out.println("You have "+p.getMoney()+" money.");
-            //System.out.println("Please select a weapon to buy('end' to quit):");
         }
         
         public static void showRoom(ArrayManager ht, Player p,Scanner sc)
@@ -121,7 +122,7 @@ public class Assignment2Structure {
                         boolean transaction = p.buy(si.item);
                         if(transaction){
                         p.withdraw(si.item.getCost());
-                        si.numberInStock--;
+                        ht.deleteAmount(choice, 1);
                         }
                         else{
                             System.out.println("Transaction Failed");
@@ -209,9 +210,6 @@ public class Assignment2Structure {
             Player pl= new Player(pname,45);
             ArrayManager ht= new ArrayManager(101);
             menuFunctions(sc, ht, pl);
-            //addWeapons(ht,sc);
-            //showRoom(ht, pl,sc);
-            //pl.printCharacter();
 
         }
     

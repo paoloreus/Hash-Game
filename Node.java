@@ -9,6 +9,8 @@ package assignment2structure;
  */
 public class Node {
     
+    //Typical Node class that would help us implement separate chaining
+    
     public Weapon data;
     public Node next;
     
